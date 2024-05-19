@@ -72,7 +72,7 @@ const NavBar = () => {
                                 </Link>
                              </div> 
                         ) : (
-                            <div className="w-[100px]">
+                            <div className="w-[120px]">
                                 <Button text="Sign Up" endpoint="sign-up" />
                             </div>
                         )
