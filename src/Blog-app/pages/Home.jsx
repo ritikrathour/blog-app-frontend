@@ -6,6 +6,7 @@ import CallToAction from "../components/CallToAction";
 import Loader from "../components/Loader" 
 const Home = () => {
     const { data, loading, error } = useFetchApi("post/posts");  
+ console.log(document.cookie.split(";")[0].split("=")[1])
     return (
         <>
             <section className="banner mb-4">
