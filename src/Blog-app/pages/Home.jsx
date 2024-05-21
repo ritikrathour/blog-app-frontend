@@ -1,21 +1,11 @@
-
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { signOutSuccess } from "../store/AuthSlice";
+ 
+import { Link } from "react-router-dom"; 
 import PostCard from "../components/PostCard";
 import useFetchApi from "../Hooks/useFetchApi";
 import CallToAction from "../components/CallToAction";
 import Loader from "../components/Loader" 
 const Home = () => {
     const { data, loading, error } = useFetchApi("post/posts");  
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const accessToken = document.cookie.split("; ")[0].split("=");
-        if (accessToken[0] !== "accessToken" || !accessToken[1]) {
-            dispatch(signOutSuccess());
-        }
-    }, [dispatch]);
     return (
         <>
             <section className="banner mb-4">
