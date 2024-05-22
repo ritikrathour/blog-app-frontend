@@ -1,12 +1,12 @@
 import axios from "axios"
 import { BaseURL } from "../constants"
 import { Link } from "react-router-dom";
-import LazyImage from "./LazyImage"
+import LazyImage from "./LazyImage";
+axios.defaults.withCredentials = true;
 const TablePostBody = ({ data, user, setPost }) => {   
    const handleDeletePost = async (id) => {
-      try {
-         const token = document.cookie.split(";")[0].split("=")[1]; 
-         await axios.delete(`${BaseURL}/post/posts/${id}/${user?._id}`,{headers:{Authorization:token}});
+      try {  
+         await axios.delete(`${BaseURL}/post/posts/${id}/${user?._id}`);
          setPost((prev) => prev.filter((post) => post?._id !== id))
       } catch (error) {
          console.log(error);

@@ -11,13 +11,12 @@ const PostComment = ({ comment, handleLike, handleDeleteComment, onEdit }) => {
     const [commentUser, setCommentUser] = useState(null);
     const [content, setContent] = useState('');
     const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
     useEffect(() => {
         const cancelToken = axios.CancelToken.source();
         ; (async () => {
             try {
-                const { data } = await axios.get(`${BaseURL}/user/get-user/${comment?.userId}`, {
-                    cancelToken: cancelToken.token
-                })
+                const { data } = await axios.get(`${BaseURL}/user/get-user/${comment?.userId}`)
                 setCommentUser(data?.data);
             } catch (error) {
                 console.log(error);
@@ -34,9 +33,8 @@ const PostComment = ({ comment, handleLike, handleDeleteComment, onEdit }) => {
     }
     // handleEditComment 
     const handleEditCommentSave = async () => {
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1];
-            await axios.patch(`${BaseURL}/comment/edit-comment/${comment?._id}`, { content }, { headers: { Authorization: token } });
+        try { 
+            await axios.patch(`${BaseURL}/comment/edit-comment/${comment?._id}`, { content } );
             setEditing(false);
             onEdit(comment, content)
         } catch (error) {

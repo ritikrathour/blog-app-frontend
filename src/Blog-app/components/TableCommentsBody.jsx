@@ -1,11 +1,10 @@
 import axios from "axios"
 import { BaseURL } from "../constants"
-
+axios.defaults.withCredentials = true;
 const TableCommentsBody = ({ data,setAllComments }) => {
     const handleDeleteComment = async(commentId)=>{
-       try {
-        const token = document.cookie.split(";")[0].split("=")[1];
-        await axios.delete(`${BaseURL}/comment/dashComment/${commentId}`,{headers:{Authorization:token}});
+       try { 
+        await axios.delete(`${BaseURL}/comment/dashComment/${commentId}`);
         setAllComments((prev)=>prev.filter(comment=>comment?._id !== commentId))
        } catch (error) {
         console.log(error);

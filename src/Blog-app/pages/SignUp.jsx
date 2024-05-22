@@ -5,6 +5,7 @@ import CTA from "../components/CTA"
 import { BaseURL } from "../constants"
 import uploadFile from "../helper/UploadPhoto";
 import LazyImage from "../components/LazyImage";
+axios.defaults.withCredentials = true;
 const SignUp = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);

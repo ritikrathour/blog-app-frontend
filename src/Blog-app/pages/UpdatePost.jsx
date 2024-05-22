@@ -8,6 +8,7 @@ import Loader from "../components/Loader"
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import uploadFile from "../helper/UploadPhoto";
+axios.defaults.withCredentials = true;
 const UpdatePost = () => {
     const navigate = useNavigate()
     const { postId } = useParams()
@@ -38,12 +39,11 @@ const UpdatePost = () => {
         }
     }
     // create post  
-    const handleupdatePost = async (e) => {
-        const token = document.cookie.split(";")[0].split("=")[1];
+    const handleupdatePost = async (e) => { 
         e.preventDefault();
         try {
             setUpdatePostLoading(true)
-            const response = await axios.patch(`${BaseURL}/post/posts/${postId}/${data?.posts[0]?.userId}`, formData, { headers: { Authorization: token } })
+            const response = await axios.patch(`${BaseURL}/post/posts/${postId}/${data?.posts[0]?.userId}`, formData)
             setUpdatePostError("");
             console.log(response);
             setUpdatePostSuccess(response?.data?.message);

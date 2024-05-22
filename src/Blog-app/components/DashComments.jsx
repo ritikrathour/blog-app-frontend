@@ -18,14 +18,14 @@ export const DashComments = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { user } = useSelector(state => state.auth.data);
+    axios.defaults.withCredentials = true;
     useEffect(() => {
         const cancelToken = axios.CancelToken.source();
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1];
+        try { 
             const getUser = async () => {
                 try {
                     setLoading(true)
-                    const { data } = await axios.get(`${BaseURL}/comment/comments`, { headers: { Authorization: token } }, {
+                    const { data } = await axios.get(`${BaseURL}/comment/comments`, {
                         cancelToken: cancelToken.token
                     })
                     setAllComments(data?.data?.comments)
@@ -58,10 +58,8 @@ export const DashComments = () => {
     const handleShowMore = async () => {
         setShowMore(false)
         const startIndex = allComments.length + 1;
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1];
-            const { data } = await axios.get(`${BaseURL}/comment/comments?${user?._id}&startIndex=${startIndex}`,
-            {headers:{Authorization:token}})
+        try { 
+            const { data } = await axios.get(`${BaseURL}/comment/comments?${user?._id}&startIndex=${startIndex}` )
             setAllComments(prev => [...prev, ...data?.data?.comments]); 
         } catch (error) {
             console.log(error?.response?.data?.message);

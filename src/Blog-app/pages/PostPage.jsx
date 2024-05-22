@@ -20,7 +20,7 @@ const PostPage = () => {
     const [comments, setComments] = useState([]);
     const [numIncriment, setNumIncriment] = useState(3);
     const navigate = useNavigate();
-
+    axios.defaults.withCredentials = true;
     // handle get posts 
     useEffect(() => {
         ; (async () => {
@@ -41,7 +41,7 @@ const PostPage = () => {
         const cancelToken = axios.CancelToken.source()
             ; (async () => {
                 try {
-                    const { data } = await axios.get(`${BaseURL}/comment/get-comments/${post?._id}`, { cancelToken: cancelToken.token });
+                    const { data } = await axios.get(`${BaseURL}/comment/get-comments/${post?._id}`);
                     setComments(data?.data)
                 } catch (error) {
                     console.log(error);
@@ -58,10 +58,8 @@ const PostPage = () => {
     // // handleSubmitComment
     const handleSubmitComment = async (e) => {
         e.preventDefault();
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1];
-            await axios.post(`${BaseURL}/comment/create-comment`, { content, postId: post?._id, userId: data?.user?._id },
-                { headers: { Authorization: token } })
+        try { 
+            await axios.post(`${BaseURL}/comment/create-comment`, { content, postId: post?._id, userId: data?.user?._id })
             setContent("")
         } catch (error) {
             console.log(error);
@@ -69,12 +67,10 @@ const PostPage = () => {
     }
     // handle like  
     const handleLike = async (id) => {
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1];
-            const { data: { data } } = await axios.post(`${BaseURL}/comment/likes/${id}`, {}, { headers: { Authorization: token } });
+        try { 
+            const { data: { data } } = await axios.post(`${BaseURL}/comment/likes/${id}`, {});
             setComments(
-                comments?.map((comment) => {
-                    console.log();
+                comments?.map((comment) => { 
                     return comment?._id === id ? {
                         ...comment,
                         likes: data?.likes,
@@ -91,9 +87,8 @@ const PostPage = () => {
         try {
             if (!data?.user) {
                 navigate("/sign-in")
-            }
-            const token = document.cookie.split(";")[0].split("=")[1];
-            await axios.delete(`${BaseURL}/comment/delete-comment/${id}`, { headers: { Authorization: token } });
+            } 
+            await axios.delete(`${BaseURL}/comment/delete-comment/${id}`);
             setComments(comments?.filter(comment => {
                 return comment?._id !== id
             }));

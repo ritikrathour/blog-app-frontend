@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BaseURL } from "../constants";
 import PostCard from "../components/PostCard"
+axios.defaults.withCredentials = true;
 const SearchPage = () => {
     const [sidebarData, setSideBarData] = useState({
         searchTerm: "",

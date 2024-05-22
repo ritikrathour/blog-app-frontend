@@ -3,12 +3,11 @@ import axios from "axios";
 import { BaseURL } from "../constants"; 
 import { Link } from "react-router-dom";
 import LazyImage from "./LazyImage";
-
+axios.defaults.withCredentials = true;
 const TableUserBody = ({ data, setAllUser }) => {
    const handleDelete = async (id) => {
-      try {
-         const token = document.cookie.split(";")[0].split("=")[1];
-         await axios.delete(`${BaseURL}/user/singleUser-delete/${id}`, { headers: { Authorization: token } });
+      try { 
+         await axios.delete(`${BaseURL}/user/singleUser-delete/${id}` );
          setAllUser((prev) => prev.filter((user) => user?._id !== id))
       } catch (error) {
          console.log(error);

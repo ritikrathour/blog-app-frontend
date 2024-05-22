@@ -17,11 +17,10 @@ const DashBoard = () => {
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    axios.defaults.withCredentials = true;
     // get multiple api's data
-    const fetchData = async (url) => {
-        const token = document.cookie.split(";")[0].split("=")[1];
-        const { data } = await axios.get(`${BaseURL}/${url}`, { headers: { Authorization: token } });
+    const fetchData = async (url) => { 
+        const { data } = await axios.get(`${BaseURL}/${url}`);
         return data
     }
     

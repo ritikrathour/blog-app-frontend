@@ -19,14 +19,14 @@ const Users = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const { user } = useSelector(state => state.auth.data);
+    axios.defaults.withCredentials = true;
     useEffect(() => {
         const cancelToken = axios.CancelToken.source();
-        try {
-            const token = document.cookie.split(";")[0].split("=")[1]; 
+        try { 
             const getUser = async () => {
                 try {
                     setLoading(true)
-                    const { data } = await axios.get(`${BaseURL}/user/users`, {headers:{ Authorization: token} }, {
+                    const { data } = await axios.get(`${BaseURL}/user/users`, {
                         cancelToken: cancelToken.token
                     }) 
                     setAllUsers(data?.data?.users)

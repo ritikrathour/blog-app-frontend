@@ -4,13 +4,8 @@ import PostCard from "../components/PostCard";
 import useFetchApi from "../Hooks/useFetchApi";
 import CallToAction from "../components/CallToAction";
 import Loader from "../components/Loader" 
-const Home = () => {
-<<<<<<< HEAD
-    const { data, loading, error } = useFetchApi("post/posts");   
-=======
-    const { data, loading, error } = useFetchApi("post/posts");  
- console.log(document.cookie.split(";")[0].split("=")[1])
->>>>>>> 5c1b1725b6fe2916e07bf4f478dc07b6f1ecc213
+const Home = () => { 
+    const { data, loading, error } = useFetchApi("post/posts");     
     return (
         <>
             <section className="banner mb-4">

@@ -5,8 +5,8 @@ import CTA from "../components/CTA";
 import axios from "axios";
 import { BaseURL } from "../constants"
 import { signInFailare, signInStart, signInSuccess } from "../store/AuthSlice";
+axios.defaults.withCredentials = true;
 const SignIn = () => { 
-    axios.defaults.withCredentials = true;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [signInSuccessMsg, setSigninSuccessMsg] = useState("")

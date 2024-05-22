@@ -11,13 +11,12 @@ const EditUserRole = () => {
     const [updatedRoleError, setUpdatedRoleError] = useState(null);
     const [loading,setLoading] = useState(false)
     const navigate = useNavigate()
-    const handleUpdateUserRole = async (e) => {
-        const token = document.cookie.split(";")[0].split("=")[1];
+    axios.defaults.withCredentials = true;
+    const handleUpdateUserRole = async (e) => { 
         e.preventDefault();
         try {
             setLoading(true)
-            const { data } = await axios.patch(`${BaseURL}/user/update-user-role/${userId}`, { isAdmin }, { headers: { Authorization: token } });
-            console.log(data);
+            const { data } = await axios.patch(`${BaseURL}/user/update-user-role/${userId}`, { isAdmin }); 
             setUpdatedRoleSuccess(data?.message)
             setUpdatedRoleError(null);
             setLoading(false)
