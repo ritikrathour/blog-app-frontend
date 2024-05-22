@@ -4,8 +4,13 @@ import PostCard from "../components/PostCard";
 import useFetchApi from "../Hooks/useFetchApi";
 import CallToAction from "../components/CallToAction";
 import Loader from "../components/Loader" 
+<<<<<<< HEAD
 const Home = () => { 
     const { data, loading, error } = useFetchApi("post/posts");     
+=======
+const Home = () => {
+    const { data, loading, error } = useFetchApi("post/posts");  
+>>>>>>> d3349c56c241e10bbb7e0536799009f9327bef9b
     return (
         <>
             <section className="banner mb-4">
