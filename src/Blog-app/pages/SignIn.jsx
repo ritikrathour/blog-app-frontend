@@ -64,7 +64,7 @@ const SignIn = () => {
                             <input className="px-2 text-slate-700 border-2 border-gray-300 rounded-md
                              focus:bg-slate-100 dark:bg-slate-700 dark:text-slate-200 dark:border-slate-600  h-[40px]" placeholder="password" type={showpass ? "text" : "password"} id="password" name="password" value={user.password} required autoComplete="off" onChange={(e) => handleChange(e)} />
                             <div className=" absolute bottom-2 cursor-pointer right-3" onClick={handleShowPassword}>
-                                <i className={`fas ${showpass ? "fa-eye" : "fa-eye"}`}></i>
+                                <i className={`fas ${showpass ? "fa-eye" : "fa-eye-slash"}`}></i>
                             </div>
                         </div>
                     </div>

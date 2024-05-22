@@ -8,14 +8,7 @@ import useFetchApi from "../Hooks/useFetchApi";
 import CallToAction from "../components/CallToAction";
 import Loader from "../components/Loader" 
 const Home = () => {
-    const { data, loading, error } = useFetchApi("post/posts");  
-    const dispatch = useDispatch();
-    useEffect(() => {
-        const accessToken = document.cookie.split("; ")[0].split("=");
-        if (accessToken[0] !== "accessToken" || !accessToken[1]) {
-            dispatch(signOutSuccess());
-        }
-    }, [dispatch]);
+    const { data, loading, error } = useFetchApi("post/posts");   
     return (
         <>
             <section className="banner mb-4">
